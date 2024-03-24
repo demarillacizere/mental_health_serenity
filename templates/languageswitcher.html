@@ -1,0 +1,48 @@
+<div class="relative">
+    <button class="flex items-center space-x-1 text-gray-700 px-2 py-1 h-8" aria-label="Select language" onclick="toggleDropdown()">
+      <span>{{ selectedLanguage }}</span>
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        {% if isOpen %}
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        {% else %}
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        {% endif %}
+      </svg>
+    </button>
+    {% if isOpen %}
+      <ul class="absolute top-10 right-0 mt-2 w-32 bg-white rounded-md shadow-lg">
+        <li>
+          <button class="flex items-center justify-start w-full px-2 py-2 text-left hover:bg-gray-100 focus:outline-none" onclick="handleLanguageChange('English')">
+            <img src="../static/assets/united-kingdom.png" alt="English" class="w-4 h-4 mr-2" style="vertical-align: middle" /> English
+          </button>
+        </li>
+        <li>
+          <button class="flex items-center justify-start w-full px-2 py-2 text-left hover:bg-gray-100 focus:outline-none" onclick="handleLanguageChange('French')">
+            <img src="../static/assets/france.png" alt="French" class="w-4 h-4 mr-1" /> French
+          </button>
+        </li>
+        <li>
+          <button class="flex items-center justify-start w-full px-2 py-2 text-left hover:bg-gray-100 focus:outline-none" onclick="handleLanguageChange('Kinyarwanda')">
+            <img src="../static/assets/rwanda.png" alt="Kinyarwanda" class="w-4 h-4 mr-1" /> Kinyarwanda
+          </button>
+        </li>
+      </ul>
+    {% endif %}
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      const dropdown = document.querySelector('.relative ul');
+      dropdown.classList.toggle('hidden');
+    }
+  
+    function handleLanguageChange(language) {
+      const selectedLanguageSpan = document.querySelector('.relative span');
+      selectedLanguageSpan.textContent = language;
+      // Perform any additional actions based on the selected language (e.g., update translations)
+      // For now, let's just log the selected language to the console
+      console.log("Selected language:", language);
+      toggleDropdown(); // Close dropdown after language selection
+    }
+  </script>
+  

@@ -1,0 +1,11 @@
+env/
+
+*.pyc
+.env
+*/__pycache__/*
+commented-out-code.py
+
+# dependencies
+/node_modules
+*/.pnp
+*.pnp.js

@@ -1,0 +1,111 @@
+{% extends "_base.html" %} {% block content %}
+<div class="container mx-auto flex justify-between mt-8 border-t py-8">
+  <!-- Professional Details Section -->
+  <div class="w-1/2 p-4">
+    <div class="bg-white shadow-md rounded-xl w-3/4">
+      <div
+        class="overflow-hidden shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
+      >
+        <img
+          src="/static/{{professional.profile_pic}}"
+          alt="{{ professional.image }}"
+        />
+        <div
+          class="inset-0 w-full h-full to-bg-black-10 from-transparent via-transparent to-black/60"
+        ></div>
+      </div>
+      <div class="p-6">
+        <h5 class="font-bold text-xl text-blue-gray-900">
+          {{professional.user.first_name}} {{professional.user.last_name}}
+        </h5>
+        <p
+          class="flex items-center gap-1.5 font-normal text-base text-blue-gray-900 antialiased"
+        >
+          {{professional.specialities}}
+        </p>
+
+        <p class="font-light text-base text-gray-700 my-5">
+          {{professional.bio}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Appointment Booking Section -->
+  <div class="w-1/2 p-4">
+    <div class="bg-white shadow-md rounded-xl">
+      <div class="p-6">
+        <h2 class="font-bold text-lg mb-4">Appointment Form</h2>
+        <form method="POST" action="/appointments/create/" class="space-y-4">
+          {% csrf_token %}
+          <div>
+            <label for="id_date" class="block mb-1">Date</label>
+            <input
+              type="date"
+              id="id_date"
+              name="date"
+              required
+              class="w-full px-3 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label for="id_start_time" class="block mb-1">Start Time</label>
+            <input
+              type="time"
+              id="id_start_time"
+              name="start_time"
+              required
+              class="w-full px-3 py-2 border rounded-md"
+            />
+          </div>
+          <div>
+            <label for="id_duration" class="block mb-1">Duration</label>
+            <select
+              id="id_duration"
+              name="duration"
+              required
+              class="w-full px-3 py-2 border rounded-md"
+            >
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+          </div>
+          <div>
+            <label for="id_purpose" class="block mb-1">Purpose</label>
+            <input
+              type="text"
+              id="id_purpose"
+              name="purpose"
+              required
+              class="w-full px-3 py-2 border rounded-md h-30"
+            />
+          </div>
+          <div>
+            <label for="id_mode" class="block mb-1">Mode</label>
+            <select
+              id="id_mode"
+              name="mode"
+              class="w-full px-3 py-2 border rounded-md"
+            >
+              <option value="In Person">In Person</option>
+              <option value="Virtual">Virtual</option>
+            </select>
+          </div>
+          <input type="hidden" name="status" value="Pending" />
+          <input
+            type="hidden"
+            name="professional"
+            value="{{professional.id}}"
+          />
+          <button
+            type="submit"
+            class="bg-primary-orange text-white px-4 py-2 rounded-md hover:bg-primary-orange"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
